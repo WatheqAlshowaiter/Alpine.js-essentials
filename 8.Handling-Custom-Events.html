@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Alpine Examples</title>
+
+		<script
+			defer
+			src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+		></script>
+
+		<link
+			href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<body class="p-12">
+		<!-- flash -->
+		<div x-data>
+			<button @click="$dispatch('flash', 'hello there again')">Trigger flash message</button>
+		</div>
+
+		<hr />
+
+		<div
+			x-data="{show: false, message: ''}"
+			@flash.window="
+				show = true;
+				message = $event.detail;
+				setTimeout(()=> show = false, 3000);
+			"
+			x-show="show"
+			x-transition.opacity.scale.75.duration
+			x-text="message"
+			class="fixed bottom-0 right-0 mb-4 mr-4 p-4 bg-blue-500 text-white rounded"
+		>
+			Some flash message
+		</div>
+	</body>
+
+	<script>
+		window.flash = (message) =>
+			window.dispatchEvent(new CustomEvent("flash", { detail: message }));
+	</script>
+</html>

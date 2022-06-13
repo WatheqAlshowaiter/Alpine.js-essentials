@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Alpine Examples</title>
+
+		<script
+			defer
+			src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+		></script>
+
+		<link
+			href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<body class="grid items-center justify-center h-screen">
+		<div x-data="{show:true}">
+			<div class="w-24 h-24">
+				<div
+					x-show="show"
+					x-transition:enter="transition transform duration-1000"
+					x-transition:enter-start="opacity-0 scale-125"
+					x-transition:enter-end="opacity-100 scale-100"
+					x-transition:leave="transition duration-200 "
+					x-transition:leave-start="opacity-100"
+					x-transition:leave-end="opacity-0"
+					class="bg-green-400 w-full h-full"
+				></div>
+			</div>
+			<button
+				@click="show = !show"
+				type="button"
+				class="bg-blue-700 dark:bg-blue-600 dark:focus:ring-blue-800 dark:hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium hover:bg-blue-800 mb-2 mr-2 mt-4 px-2 px-6 py-2.5 rounded-lg text-sm text-white"
+			>
+				Default
+			</button>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<script
+			src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+			defer
+		></script>
+	</head>
+
+	<body>
+		<!-- 4. Two way binding -->
+		<form
+			x-data="
+			{
+				form: {
+					name: 'John Doe',
+					email:  'John@doe.com'
+				},
+
+				user : null ,
+				submit(){
+					fetch('https://reqres.in/api/users',{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(this.form)
+					})
+					.then(response => response.json())
+					.then(user => this.user = user)
+				}
+		   }"
+			@submit.prevent="submit"
+		>
+			<label for="name">name</label>
+			<input type="text" name="name" id="name" x-model="form.name" />
+
+			<template x-if="user">
+				<p
+					x-text=" 'The user '+user.name+': '+user.email+ ' was created at '+ user.createdAt"
+				></p>
+			</template>
+		</form>
+	</body>
+</html>

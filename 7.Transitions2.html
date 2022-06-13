@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Alpine Examples</title>
+
+		<script
+			defer
+			src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+		></script>
+
+		<link
+			href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<body class="grid items-center justify-center h-screen">
+		<div x-data="{show: false}" @click.away="show = false">
+			<button @click="show = !show" class="border">Links</button>
+
+			<div
+				x-show="show"
+				x-transition:enter="transition duration-200 transform ease-out"
+
+				x-transition:leave="transition duration-100 transform ease-in"
+				x-transition:leave-end="scale-90 opacity-0"
+
+				class="absolute bg-black text-white py-2 rounded mt-1"
+			>
+				<a href="#" class="block hover:bg-gray-800 text-xs py-px px-4">Edit</a>
+				<a href="#" class="block hover:bg-gray-800 text-xs py-px px-4"
+					>Delete</a
+				>
+				<a href="#" class="block hover:bg-gray-800 text-xs py-px px-4"
+					>Report Spam</a
+				>
+			</div>
+		</div>
+	</body>
+</html>
